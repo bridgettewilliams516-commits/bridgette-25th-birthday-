@@ -1,0 +1,475 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridgette's 25th Birthday Gift Fund 💜</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Bridgerton Styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lavender: {
+                            50: '#F5F3F8',
+                            100: '#EAE5F1',
+                            200: '#D5CBE4',
+                            300: '#BBAA9F',
+                            400: '#A38CB8',
+                            500: '#8A6E9F',
+                            600: '#6E5283',
+                            700: '#543B66',
+                            800: '#3C284B',
+                            900: '#261832',
+                        },
+                        gold: {
+                            light: '#F4E3B4',
+                            DEFAULT: '#D4AF37',
+                            dark: '#A38020',
+                        },
+                        cream: {
+                            light: '#FFFDF9',
+                            DEFAULT: '#FAF6F0',
+                            dark: '#F3ECE2',
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['"Cinzel Decorative"', 'serif'],
+                        playfair: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FAF6F0;
+            background-image: radial-gradient(#D5CBE4 0.65px, transparent 0.65px), radial-gradient(#D5CBE4 0.65px, #FAF6F0 0.65px);
+            background-size: 26px 26px;
+            background-position: 0 0, 13px 13px;
+        }
+
+        .gold-border {
+            border: 2px solid #D4AF37;
+            box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.15), 0 10px 25px -5px rgba(110, 82, 131, 0.1);
+        }
+
+        .gold-border-sm {
+            border: 1px solid #D4AF37;
+        }
+
+        .ornate-card {
+            background: rgba(255, 253, 249, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 12px 32px rgba(84, 59, 102, 0.08), 0 2px 6px rgba(212, 175, 55, 0.15);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #A38020 0%, #D4AF37 50%, #8A6E9F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-btn {
+            background: linear-gradient(135deg, #D4AF37 0%, #C5A059 100%);
+            color: #261832;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .gold-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .lavender-btn {
+            background: linear-gradient(135deg, #8A6E9F 0%, #6E5283 100%);
+            color: #FFFDF9;
+            box-shadow: 0 4px 15px rgba(110, 82, 131, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .lavender-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(110, 82, 131, 0.45);
+        }
+
+        .progress-bar-glow {
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Regency Corner Ornaments */
+        .corner-ornament {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-color: #D4AF37;
+            pointer-events: none;
+        }
+        .top-left { top: 8px; left: 8px; border-top: 2px solid; border-left: 2px solid; }
+        .top-right { top: 8px; right: 8px; border-top: 2px solid; border-right: 2px solid; }
+        .bottom-left { bottom: 8px; left: 8px; border-bottom: 2px solid; border-left: 2px solid; }
+        .bottom-right { bottom: 8px; right: 8px; border-bottom: 2px solid; border-right: 2px solid; }
+    </style>
+</head>
+<body class="min-h-screen text-lavender-900 font-sans pb-16 pt-4 px-3 sm:px-6">
+
+    <!-- Toast Notification for Copying -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 bg-lavender-800 text-gold-light px-6 py-3 rounded-full font-medium text-sm shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2 border border-gold/40">
+        <i class="fa-solid fa-circle-check text-gold"></i>
+        <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <!-- Main Container -->
+    <main class="max-w-xl mx-auto space-y-6">
+
+        <!-- Header / Hero Section -->
+        <header class="ornate-card rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden">
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+
+            <!-- Crown Icon -->
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-lavender-100 text-gold border border-gold/50 mb-3 shadow-inner">
+                <i class="fa-solid fa-crown text-2xl"></i>
+            </div>
+
+            <!-- Title -->
+            <p class="font-cinzel text-xs tracking-widest text-lavender-600 uppercase mb-1">Dearest Friends & Family</p>
+            <h1 class="font-playfair text-3xl sm:text-4xl font-bold text-lavender-900 mb-2">
+                Bridgette's <span class="gold-gradient-text">25th Birthday</span>
+            </h1>
+            <p class="font-playfair italic text-lavender-600 text-lg sm:text-xl">Washing Machine Group Gift Fund</p>
+
+            <div class="my-4 flex items-center justify-center gap-3">
+                <div class="h-px bg-gold/40 w-16"></div>
+                <span class="text-gold text-sm"><i class="fa-solid fa-gem"></i></span>
+                <div class="h-px bg-gold/40 w-16"></div>
+            </div>
+
+            <!-- Birthday Message Card -->
+            <div class="bg-lavender-50/80 rounded-2xl p-4 sm:p-5 border border-lavender-200/60 text-left relative">
+                <i class="fa-solid fa-quote-left text-lavender-300 text-3xl absolute top-3 left-3 -z-0 opacity-40"></i>
+                <p class="relative z-10 font-playfair text-lavender-800 text-base sm:text-lg leading-relaxed italic text-center">
+                    "One of my bigger birthday wishes is a new washing machine for my home. 💜 I've added it as an optional group gift for anyone who would like to contribute towards it. There is absolutely no pressure or expected amount. Every little contribution would be appreciated, but your presence and celebrating with me is more than enough!"
+                </p>
+            </div>
+        </header>
+
+        <!-- Product Showcase Section -->
+        <section class="ornate-card rounded-3xl p-6 relative">
+            <div class="flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-gift text-gold text-xl"></i>
+                <h2 class="font-playfair font-bold text-xl text-lavender-900">The Birthday Wish</h2>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-5 items-center bg-white/70 p-4 rounded-2xl border border-lavender-100">
+                <!-- Image Container with fallback -->
+                <div class="w-full sm:w-2/5 aspect-square bg-cream-light rounded-xl overflow-hidden border border-gold/30 relative flex items-center justify-center p-2">
+                    <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&q=80&w=600" 
+                         alt="Defy 14kg Top Loader Washing Machine DTL160" 
+                         class="object-contain h-full w-full rounded-lg"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/EAE5F1/543B66?text=Defy+14kg+Washing+Machine';" />
+                    <span class="absolute top-2 left-2 bg-lavender-800 text-gold-light text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        DEFY DTL160
+                    </span>
+                </div>
+
+                <!-- Specs -->
+                <div class="w-full sm:w-3/5 space-y-2 text-center sm:text-left">
+                    <h3 class="font-playfair font-bold text-lg text-lavender-900">Defy 14kg Top Loader Washing Machine</h3>
+                    <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
+                        <span class="bg-lavender-100 text-lavender-700 text-xs px-2.5 py-1 rounded-md font-medium">14 kg Capacity</span>
+                        <span class="bg-lavender-100 text-lavender-700 text-xs px-2.5 py-1 rounded-md font-medium">Top-Loader</span>
+                        <span class="bg-lavender-100 text-lavender-700 text-xs px-2.5 py-1 rounded-md font-medium">Hirsch's Retailer</span>
+                    </div>
+                    <p class="text-xs text-lavender-600 leading-relaxed pt-1">
+                        High capacity, energy efficient top-loader to help Bridgette set up her new laundry home space!
+                    </p>
+                    <a href="https://www.hirschs.co.za/brands/defy-14kg-top-loader-washing-machine-dtl160" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-flex items-center gap-1.5 text-xs text-lavender-700 font-semibold hover:text-gold transition-colors pt-2 underline">
+                        <span>View on Hirsch's Website</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fund Progress Section -->
+        <section class="ornate-card rounded-3xl p-6 space-y-5">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line text-gold text-lg"></i>
+                    <h2 class="font-playfair font-bold text-xl text-lavender-900">Gift Progress</h2>
+                </div>
+                <span id="percentage-badge" class="bg-gold-light text-lavender-900 font-bold text-xs px-3 py-1 rounded-full border border-gold/40">
+                    0% Funded
+                </span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="space-y-2">
+                <div class="w-full bg-lavender-100 h-6 rounded-full overflow-hidden p-1 border border-gold/30">
+                    <div id="progress-bar" class="bg-gradient-to-r from-lavender-500 via-gold to-gold-light h-full rounded-full transition-all duration-1000 ease-out progress-bar-glow" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-xs font-semibold text-lavender-700 px-1">
+                    <span>Raised: <strong id="raised-amount" class="text-lavender-900 text-sm">R0</strong></span>
+                    <span>Target: <span class="text-lavender-900">R5,500</span></span>
+                </div>
+            </div>
+
+            <!-- Remaining Amount Card -->
+            <div class="bg-cream-dark/60 rounded-xl p-3 flex justify-between items-center text-sm border border-gold/20">
+                <span class="text-lavender-700">Still Needed:</span>
+                <span id="remaining-amount" class="font-bold text-lavender-900 text-base">R5,500</span>
+            </div>
+
+            <!-- Calculator / Chip Suggestions -->
+            <div class="space-y-2 pt-1">
+                <label class="text-xs font-semibold text-lavender-700 uppercase tracking-wider block">Suggested Contribution Options:</label>
+                <div class="grid grid-cols-4 gap-2">
+                    <button type="button" class="bg-white hover:bg-lavender-100 border border-gold/40 text-lavender-800 text-xs font-semibold py-2 rounded-xl transition text-center">R50</button>
+                    <button type="button" class="bg-white hover:bg-lavender-100 border border-gold/40 text-lavender-800 text-xs font-semibold py-2 rounded-xl transition text-center">R100</button>
+                    <button type="button" class="bg-white hover:bg-lavender-100 border border-gold/40 text-lavender-800 text-xs font-semibold py-2 rounded-xl transition text-center">R200</button>
+                    <button type="button" class="bg-white hover:bg-lavender-100 border border-gold/40 text-lavender-800 text-xs font-semibold py-2 rounded-xl transition text-center">R500</button>
+                </div>
+            </div>
+
+            <!-- Privacy Note -->
+            <div class="text-center text-xs text-lavender-600 italic bg-lavender-50/50 p-3 rounded-xl border border-lavender-100">
+                <p>🔒 <strong>Privacy Note:</strong> Contributions are 100% private. Individual names and amounts will never be displayed publicly.</p>
+            </div>
+        </section>
+
+        <!-- Banking & Payment Details Section -->
+        <section class="ornate-card rounded-3xl p-6 space-y-5">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-building-columns text-gold text-xl"></i>
+                <h2 class="font-playfair font-bold text-xl text-lavender-900">EFT Payment Details</h2>
+            </div>
+
+            <p class="text-xs text-lavender-600">
+                Contributions can be paid directly into the dedicated birthday savings account below:
+            </p>
+
+            <div class="space-y-3 bg-white/80 p-4 rounded-2xl border border-gold/30">
+                <!-- Account Holder -->
+                <div class="flex justify-between items-center text-xs sm:text-sm pb-2 border-b border-lavender-100">
+                    <span class="text-lavender-600">Account Holder:</span>
+                    <span class="font-bold text-lavender-900">Bridgette Williams</span>
+                </div>
+
+                <!-- Bank -->
+                <div class="flex justify-between items-center text-xs sm:text-sm pb-2 border-b border-lavender-100">
+                    <span class="text-lavender-600">Bank:</span>
+                    <span class="font-bold text-lavender-900">Capitec Bank</span>
+                </div>
+
+                <!-- Account Type -->
+                <div class="flex justify-between items-center text-xs sm:text-sm pb-2 border-b border-lavender-100">
+                    <span class="text-lavender-600">Account Type:</span>
+                    <span class="font-bold text-lavender-900">Savings Account</span>
+                </div>
+
+                <!-- Account Number + Copy -->
+                <div class="flex justify-between items-center text-xs sm:text-sm pb-2 border-b border-lavender-100">
+                    <div>
+                        <span class="text-lavender-600 block text-[10px] uppercase">Account Number</span>
+                        <span class="font-mono font-bold text-lavender-900 text-sm sm:text-base">2616401351</span>
+                    </div>
+                    <button onclick="copyToClipboard('2616401351', 'Account number copied!')" 
+                            class="gold-btn px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                </div>
+
+                <!-- Payment Reference + Copy -->
+                <div class="flex justify-between items-center text-xs sm:text-sm">
+                    <div>
+                        <span class="text-lavender-600 block text-[10px] uppercase">Payment Reference</span>
+                        <span class="font-mono font-bold text-lavender-900 text-sm sm:text-base">25TH BIRTHDAY</span>
+                    </div>
+                    <button onclick="copyToClipboard('25TH BIRTHDAY', 'Payment reference copied!')" 
+                            class="gold-btn px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-xs text-lavender-600 font-medium">
+                    ✨ Prefer to buy an individual gift? That is equally wonderful!
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-xs text-lavender-500 py-4 space-y-2">
+            <p class="font-playfair italic">Thank you for celebrating Bridgette's 25th Birthday! 👑</p>
+            
+            <!-- Admin Toggle Button -->
+            <div>
+                <button onclick="toggleAdminDrawer()" class="text-lavender-400 hover:text-gold text-[10px] transition-colors underline">
+                    <i class="fa-solid fa-lock text-[9px] mr-1"></i> Bridgette's Admin Updates
+                </button>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Admin Drawer Modal (Hidden by Default) -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-cream-light ornate-card max-w-md w-full rounded-3xl p-6 space-y-4 border-2 border-gold relative">
+            <button onclick="toggleAdminDrawer()" class="absolute top-4 right-4 text-lavender-600 hover:text-lavender-900 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-2 border-b border-gold/30 pb-3">
+                <i class="fa-solid fa-sliders text-gold text-lg"></i>
+                <h3 class="font-playfair font-bold text-lg text-lavender-900">Update Raised Amount</h3>
+            </div>
+
+            <p class="text-xs text-lavender-600">
+                Bridgette, update the total amount raised as you receive deposits. This will automatically adjust the progress bar for all visitors on this device!
+            </p>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-bold text-lavender-700 block mb-1">Set Total Raised (ZAR):</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-2.5 text-lavender-500 font-bold">R</span>
+                        <input type="number" id="manual-total-input" class="w-full pl-8 pr-4 py-2 border border-gold/50 rounded-xl bg-white font-mono font-bold text-lavender-900 focus:outline-none focus:ring-2 focus:ring-gold" placeholder="0">
+                    </div>
+                </div>
+
+                <!-- Quick Add Buttons -->
+                <div>
+                    <label class="text-[10px] font-bold text-lavender-600 uppercase tracking-wider block mb-1">Quick Add Contribution:</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="quickAdd(100)" class="bg-lavender-100 hover:bg-lavender-200 text-lavender-800 text-xs font-semibold py-1.5 rounded-lg border border-lavender-300 transition">+ R100</button>
+                        <button onclick="quickAdd(200)" class="bg-lavender-100 hover:bg-lavender-200 text-lavender-800 text-xs font-semibold py-1.5 rounded-lg border border-lavender-300 transition">+ R200</button>
+                        <button onclick="quickAdd(500)" class="bg-lavender-100 hover:bg-lavender-200 text-lavender-800 text-xs font-semibold py-1.5 rounded-lg border border-lavender-300 transition">+ R500</button>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <button onclick="saveTotal()" class="gold-btn w-full py-2.5 rounded-xl font-bold text-sm">Save & Update Page</button>
+                    <button onclick="resetTotal()" class="bg-rose-100 hover:bg-rose-200 text-rose-800 px-3 py-2.5 rounded-xl font-semibold text-xs transition">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        const TARGET_AMOUNT = 5500;
+        const STORAGE_KEY = 'bridgette_25th_fund_raised';
+
+        // Load raised total from localStorage or default to 0
+        function getRaisedTotal() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved !== null ? parseFloat(saved) : 0;
+        }
+
+        // Update UI
+        function updateUI() {
+            const raised = getRaisedTotal();
+            const remaining = Math.max(0, TARGET_AMOUNT - raised);
+            const percentage = Math.min(100, Math.round((raised / TARGET_AMOUNT) * 100));
+
+            // Format Currency
+            const formatZAR = (val) => 'R' + val.toLocaleString('en-ZA');
+
+            document.getElementById('raised-amount').innerText = formatZAR(raised);
+            document.getElementById('remaining-amount').innerText = formatZAR(remaining);
+            document.getElementById('percentage-badge').innerText = `${percentage}% Funded`;
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('manual-total-input').value = raised;
+        }
+
+        // Copy to clipboard helper
+        function copyToClipboard(text, message) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => showToast(message));
+            } else {
+                // Fallback for non-HTTPS iframe environments
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.opacity = "0";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast(message);
+                } catch (err) {
+                    showToast("Failed to copy");
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // Toast notification handler
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.innerText = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+
+        // Toggle Admin Modal
+        function toggleAdminDrawer() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.toggle('opacity-0');
+            modal.classList.toggle('pointer-events-none');
+        }
+
+        // Save Manual Total
+        function saveTotal() {
+            const inputVal = parseFloat(document.getElementById('manual-total-input').value) || 0;
+            localStorage.setItem(STORAGE_KEY, inputVal);
+            updateUI();
+            toggleAdminDrawer();
+            showToast('Fund total updated successfully!');
+        }
+
+        // Quick add helper
+        function quickAdd(amount) {
+            const current = parseFloat(document.getElementById('manual-total-input').value) || 0;
+            document.getElementById('manual-total-input').value = current + amount;
+        }
+
+        // Reset total to 0
+        function resetTotal() {
+            localStorage.setItem(STORAGE_KEY, 0);
+            updateUI();
+            toggleAdminDrawer();
+            showToast('Fund total reset to R0');
+        }
+
+        // Initialize UI on load
+        window.onload = function() {
+            updateUI();
+        };
+    </script>
+</body>
+</html>
+```
